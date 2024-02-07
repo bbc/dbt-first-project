@@ -1,0 +1,9 @@
+version: 1
+
+models:
+  - name: aggregations_test
+    tests:
+      - not_null:
+          column: [brand_id, brand_title, date_of_event, users, time_spent]
+      - unique:
+          columns: brand_id

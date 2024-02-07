@@ -3,7 +3,7 @@
 {{ config(
     materialized='table',
     schema='central_analytics_sandbox'
-    model_name='bs_dbt_test_projecte_aggregated'
+    model_name='bs_dbt_test_project_aggregated'
 ) }}
 
 select
@@ -13,7 +13,8 @@ select
     count(distinct audience_id) as users,
     sum(playback_time_total) as time_spent
 from
-    {{ ref('staging_raw_data_table') }}
+    {{ ref('bs_dbt_test_project_raw') }}
+where date_of_event = ('<params.run_date')::date - 1
 group by
     brand_id,
     brand_title,
